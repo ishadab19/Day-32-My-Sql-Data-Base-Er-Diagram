@@ -1,0 +1,283 @@
+---------welcome to Address_Book_Service_DB_Mysql_Program--------
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| emplooyedb         |
+| information_schema |
+| mysql              |
+| payroll_service    |
+| performance_schema |
+| person             |
+| sys                |
++--------------------+
+7 rows in set (0.05 sec)
+
+mysql> create database addressbook;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> use addressbook;
+Database changed
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| addressbook        |
+| emplooyedb         |
+| information_schema |
+| mysql              |
+| payroll_service    |
+| performance_schema |
+| person             |
+| sys                |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> create table addressBook_table(FirstName varchar(30)not null,LastName varchar(30)not null,
+    -> Address varchar(200),city varchar(30),State varchar(30),zip int(10),PhoneNumber int(12),
+    -> Email varchar(100));
+Query OK, 0 rows affected, 2 warnings (0.07 sec)
+
+mysql> desc addressBook_table;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| FirstName   | varchar(30)  | NO   |     | NULL    |       |
+| LastName    | varchar(30)  | NO   |     | NULL    |       |
+| Address     | varchar(200) | YES  |     | NULL    |       |
+| city        | varchar(30)  | YES  |     | NULL    |       |
+| State       | varchar(30)  | YES  |     | NULL    |       |
+| zip         | int          | YES  |     | NULL    |       |
+| PhoneNumber | int          | YES  |     | NULL    |       |
+| Email       | varchar(100) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+8 rows in set (0.04 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| addressbook        |
+| emplooyedb         |
+| information_schema |
+| mysql              |
+| payroll_service    |
+| performance_schema |
+| person             |
+| sys                |
++--------------------+
+8 rows in set (0.00 sec)
+
+
+mysql> insert into addressBook_table values('raj','anand','mgroad','delhi','india',8956266,749231994,'raj4@gmail.com');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from addressBook_table;
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+
+| FirstName | LastName | Address    | city    | State       | zip     | PhoneNumber | Email                 |
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+
+| shadab    | hussain  | chapra     | saran   | bihar       |  841301 |   787921994 | me.shadab19@gmail.com |
+| Tony      | Stark    | highstreet | newyork | unitedstate |  118266 |    79231994 | tony9@gmail.com       |
+| jarvis    | leah     | highcity   | brisben | austrelia   |  356266 |   449231994 | jarv4@gmail.com       |
+| raj       | anand    | mgroad     | delhi   | india       | 8956266 |   749231994 | raj4@gmail.com        |
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+
+4 rows in set (0.00 sec)
+
+mysql> update addressBook_table set PhoneNumber = 989821949 where FirstName = "shadab";  //updating mobile number here..
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressBook_table;
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+
+| FirstName | LastName | Address    | city    | State       | zip     | PhoneNumber | Email                 |
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+
+| shadab    | hussain  | chapra     | saran   | bihar       |  841301 |   989821949 | me.shadab19@gmail.com |
+| Tony      | Stark    | highstreet | newyork | unitedstate |  118266 |    79231994 | tony9@gmail.com       |
+| jarvis    | leah     | highcity   | brisben | austrelia   |  356266 |   449231994 | jarv4@gmail.com       |
+| raj       | anand    | mgroad     | delhi   | india       | 8956266 |   749231994 | raj4@gmail.com        |
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+
+4 rows in set (0.00 sec)
+
+
+mysql> delete from addressBook_table where FirstName = "jarvis";             //deleting entry from the help of firstname..
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from addressBook_table;
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+
+| FirstName | LastName | Address    | city    | State       | zip     | PhoneNumber | Email                 |
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+
+| shadab    | hussain  | chapra     | saran   | bihar       |  841301 |   989821949 | me.shadab19@gmail.com |
+| Tony      | Stark    | highstreet | newyork | unitedstate |  118266 |    79231994 | tony9@gmail.com       |
+| raj       | anand    | mgroad     | delhi   | india       | 8956266 |   749231994 | raj4@gmail.com        |
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from addressBook_table where city = "saran";
++-----------+----------+---------+-------+-------+--------+-------------+-----------------------+
+| FirstName | LastName | Address | city  | State | zip    | PhoneNumber | Email                 |
++-----------+----------+---------+-------+-------+--------+-------------+-----------------------+
+| shadab    | hussain  | chapra  | saran | bihar | 841301 |   989821949 | me.shadab19@gmail.com |
++-----------+----------+---------+-------+-------+--------+-------------+-----------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from addressBook_table where city = "newyork";
++-----------+----------+------------+---------+-------------+--------+-------------+-----------------+
+| FirstName | LastName | Address    | city    | State       | zip    | PhoneNumber | Email           |
++-----------+----------+------------+---------+-------------+--------+-------------+-----------------+
+| Tony      | Stark    | highstreet | newyork | unitedstate | 118266 |    79231994 | tony9@gmail.com |
++-----------+----------+------------+---------+-------------+--------+-------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from addressBook_table where city = "delhi";
++-----------+----------+---------+-------+-------+---------+-------------+----------------+
+| FirstName | LastName | Address | city  | State | zip     | PhoneNumber | Email          |
++-----------+----------+---------+-------+-------+---------+-------------+----------------+
+| raj       | anand    | mgroad  | delhi | india | 8956266 |   749231994 | raj4@gmail.com |
++-----------+----------+---------+-------+-------+---------+-------------+----------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from addressBook_table where city = "newyork";
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.04 sec)
+
+mysql> select count(*) from addressBook_table where city = "delhi";
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from addressBook_table where city = "saran";
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+
+mysql> select * from addressBook_table order by FirstName asc;                     //sorting alphabeticaly by FirstName..
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+
+| FirstName | LastName | Address    | city    | State       | zip     | PhoneNumber | Email                 |
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+
+| raj       | anand    | mgroad     | delhi   | india       | 8956266 |   749231994 | raj4@gmail.com        |
+| shadab    | hussain  | chapra     | saran   | bihar       |  841301 |   989821949 | me.shadab19@gmail.com |
+| Tony      | Stark    | highstreet | newyork | unitedstate |  118266 |    79231994 | tony9@gmail.com       |
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+
+3 rows in set (0.04 sec)
+
+mysql> alter table addressBook_table add column RelationName varchar(200);  // adding new column
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table addressBook_table add column Type varchar(200);	// adding new column
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from addressBook_table
+    -> ;
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+--------------+------+
+| FirstName | LastName | Address    | city    | State       | zip     | PhoneNumber | Email                 | RelationName | Type |
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+--------------+------+
+| shadab    | hussain  | chapra     | saran   | bihar       |  841301 |   989821949 | me.shadab19@gmail.com | NULL         | NULL |
+| Tony      | Stark    | highstreet | newyork | unitedstate |  118266 |    79231994 | tony9@gmail.com       | NULL         | NULL |
+| raj       | anand    | mgroad     | delhi   | india       | 8956266 |   749231994 | raj4@gmail.com        | NULL         | NULL |
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+--------------+------+
+3 rows in set (0.00 sec)
+
+mysql> update addressBook_table set RelationName = 'Tony' where FirstName = 'shadab';   //Updating relation and type
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update addressBook_table set RelationName = 'shadab' where FirstName = 'Tony';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update addressBook_table set RelationName = 'shadab' where FirstName = 'raj';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update addressBook_table set type = 'friend' where FirstName = 'shadab';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update addressBook_table set type = 'familyfriend' where FirstName = 'Tony';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update addressBook_table set type = 'profession' where FirstName = 'raj';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressBook_table;
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+--------------+--------------+
+| FirstName | LastName | Address    | city    | State       | zip     | PhoneNumber | Email                 | RelationName | Type         |
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+--------------+--------------+
+| shadab    | hussain  | chapra     | saran   | bihar       |  841301 |   989821949 | me.shadab19@gmail.com | Tony         | friend       |
+| Tony      | Stark    | highstreet | newyork | unitedstate |  118266 |    79231994 | tony9@gmail.com       | shadab       | familyfriend |
+| raj       | anand    | mgroad     | delhi   | india       | 8956266 |   749231994 | raj4@gmail.com        | shadab       | profession   |
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+--------------+--------------+
+3 rows in set (0.00 sec)
+
+
+
+mysql> select count(*) from addressBook_table;       //getting count
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.05 sec)
+
+
+mysql> select * from addressBook_table where RelationName = "Friend";
+Empty set (0.00 sec)
+
+mysql> select * from addressBook_table where RelationName = "Tony";
++-----------+----------+---------+-------+-------+--------+-------------+-----------------------+--------------+--------+
+| FirstName | LastName | Address | city  | State | zip    | PhoneNumber | Email                 | RelationName | Type   |
++-----------+----------+---------+-------+-------+--------+-------------+-----------------------+--------------+--------+
+| shadab    | hussain  | chapra  | saran | bihar | 841301 |   989821949 | me.shadab19@gmail.com | Tony         | friend |
++-----------+----------+---------+-------+-------+--------+-------------+-----------------------+--------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from addressBook_table where RelationName = "shadab";
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------+--------------+--------------+
+| FirstName | LastName | Address    | city    | State       | zip     | PhoneNumber | Email           | RelationName | Type         |
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------+--------------+--------------+
+| Tony      | Stark    | highstreet | newyork | unitedstate |  118266 |    79231994 | tony9@gmail.com | shadab       | familyfriend |
+| raj       | anand    | mgroad     | delhi   | india       | 8956266 |   749231994 | raj4@gmail.com  | shadab       | profession   |
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------+--------------+--------------+
+2 rows in set (0.00 sec)
+
+mysql> update addressBook_table set RelationName = 'Brother' where FirstName = 'shadab';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update addressBook_table set RelationName = 'friend' where FirstName = 'Tony';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update addressBook_table set RelationName = 'ElederBrother' where FirstName = 'raj';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressBook_table;
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+---------------+--------------+
+| FirstName | LastName | Address    | city    | State       | zip     | PhoneNumber | Email                 | RelationName  | Type         |
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+---------------+--------------+
+| shadab    | hussain  | chapra     | saran   | bihar       |  841301 |   989821949 | me.shadab19@gmail.com | Brother       | friend       |
+| Tony      | Stark    | highstreet | newyork | unitedstate |  118266 |    79231994 | tony9@gmail.com       | friend        | familyfriend |
+| raj       | anand    | mgroad     | delhi   | india       | 8956266 |   749231994 | raj4@gmail.com        | ElederBrother | profession   |
++-----------+----------+------------+---------+-------------+---------+-------------+-----------------------+---------------+--------------+
+3 rows in set (0.00 sec)
+
+mysql>
+
+
+
